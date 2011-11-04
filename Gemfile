@@ -29,14 +29,15 @@ gem 'haml-rails'
 # gem 'capistrano'
 
 group :development, :test do
-  gem "rspec-rails"
-  gem "cucumber-rails"
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
   gem 'unicorn'
   platform :ruby_18 do
-    gem "ruby-debug"
+    gem 'ruby-debug'
   end
 
   platform :ruby_19 do
-    gem "ruby-debug19", :require => 'ruby-debug'
+    gem 'ruby-debug19', :require => 'ruby-debug'
   end
 end
