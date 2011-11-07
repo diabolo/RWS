@@ -6,10 +6,19 @@ module ServiceHelper
     header 'Content-Type', 'application/json'
   end
 
-  def call_create(path=nil, params={})
-    path ||= services_path
+  def call_create(params={})
     json_headers
-    post(path, params.to_json)
+    post(services_path, params.to_json)
+  end
+
+  def last_response_url
+    JSON.parse(last_response.body)['url']
+  end
+
+  def default_service
+    {
+      :requestor => "fred.flinstone@example.com"
+    }
   end
 end
 World(ServiceHelper)
@@ -23,5 +32,27 @@ Then /^I should receive a response$/ do
 end
 
 Then /^the reponse should contain the url of the service$/ do
-  JSON.parse(last_response.body)['url'].should_not be_nil
+  last_response_url.should_not be_nil
 end
+
+When /^I use the response url to receive the service$/ do
+  json_headers
+  get last_response_url
+end
+
+Then /^I should see the service$/ do
+  JSON.parse(last_response.body)['service'].should_not be_nil
+end
+
+When /^I call create on the service without the requestor$/ do
+  call_create(default_service.except(:requestor))
+end
+
+Then /^I should receive an error$/ do
+  (400..499).should be_member(last_response.status)
+end
+
+Then /^I should receive usage instructions$/ do
+    pending # express the regexp above with the code you wish you had
+end
+

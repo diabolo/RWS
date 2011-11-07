@@ -1,5 +1,5 @@
 Rws::Application.routes.draw do
-  resources :services, :only => [:create]
+  resources :services, :only => [:create, :show]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
