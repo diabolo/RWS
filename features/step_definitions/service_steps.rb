@@ -6,7 +6,7 @@ module ServiceHelper
     header 'Content-Type', 'application/json'
   end
 
-  def call_create(params={})
+  def call_create(params=default_service)
     json_headers
     post(services_path, params.to_json)
   end
@@ -32,6 +32,7 @@ Then /^I should receive a response$/ do
 end
 
 Then /^the reponse should contain the url of the service$/ do
+  debugger
   last_response_url.should_not be_nil
 end
 
@@ -54,5 +55,9 @@ end
 
 Then /^I should receive usage instructions$/ do
     pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should receive a message about the requestor$/ do
+  last_response.body.should match(/requestor('|"):/)
 end
 

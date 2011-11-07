@@ -20,4 +20,5 @@ Feature: Service
   Scenario: Call create on the service without the requestor
     When I call create on the service without the requestor
     Then I should receive an error
+    And I should receive a message about the requestor
     And I should receive usage instructions
