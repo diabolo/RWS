@@ -6,3 +6,8 @@ Feature: Service
   Scenario: Call create on the service
     When I call create on the service
     Then I should receive a response
+
+    @wip
+  Scenario: Use response to view the service
+    When I call create on the service
+    Then the reponse should contain the url of the service
