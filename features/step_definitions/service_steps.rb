@@ -23,5 +23,5 @@ Then /^I should receive a response$/ do
 end
 
 Then /^the reponse should contain the url of the service$/ do
-  JSON.parse(last_response.body)[:url].should_not be_nil
+  JSON.parse(last_response.body)['url'].should_not be_nil
 end
