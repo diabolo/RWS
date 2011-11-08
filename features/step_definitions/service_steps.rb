@@ -32,7 +32,6 @@ Then /^I should receive a response$/ do
 end
 
 Then /^the reponse should contain the url of the service$/ do
-  debugger
   last_response_url.should_not be_nil
 end
 
@@ -54,7 +53,7 @@ Then /^I should receive an error$/ do
 end
 
 Then /^I should receive usage instructions$/ do
-    pending # express the regexp above with the code you wish you had
+  JSON.parse(last_response.body)['usage'].should_not be_nil
 end
 
 Then /^I should receive a message about the requestor$/ do
